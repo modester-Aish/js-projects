@@ -1,0 +1,543 @@
+@property --angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 91deg;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background: linear-gradient(180deg, #07131c, #305472);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Fira Code", Consolas, "Courier New", Courier, monospace;
+}
+
+body:before,
+body:after {
+  content: "CLICK & HOLD TO CREATE LIGHTNING";
+  font-family: Arial, Helvetica, serif;
+  font-size: 12px;
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  bottom: 18px;
+  color: #fff4;
+  z-index: -1;
+}
+
+body:before {
+  content: "HOVER SCREEN TO CHANGE WIND SPEED";
+  top: 18px;
+}
+
+body:active:before,
+body:active:after {
+  color: #fff0;
+  transition: all 0.5s ease 0s;
+}
+
+/* Rain Animation Styles */
+.rain {
+  position: absolute;
+  width: 120vw;
+  height: 100vh;
+  cursor: pointer;
+  z-index: 0;
+  left: -10vw;
+}
+
+.rain .left,
+.rain .right {
+  width: 20vw;
+  height: 100vh;
+  left: 10vw;
+  position: absolute;
+  box-sizing: border-box;
+  z-index: 2;
+}
+
+.rain .left:hover ~ .drop {
+  --angle: 105deg;
+}
+
+.rain .left:hover ~ .right:after {
+  transform: rotate(22deg);
+  transition: all 0.5s ease 0s;
+}
+
+.rain .right {
+  left: initial;
+  right: 10vw;
+}
+
+.rain .right:after {
+  content: "\25B3 \A \25BC";
+  position: fixed;
+  text-indent: 1px;
+  left: calc(50% - 30px);
+  top: 45px;
+  color: #fff8;
+  font-size: 20px;
+  border: 2px dashed #fff3;
+  border-radius: 100%;
+  width: 60px;
+  height: 60px;
+  box-sizing: border-box;
+  padding: 13px 18px;
+  text-align: center;
+  line-height: 15px;
+  transition: all 0.5s ease 0s;
+  white-space: pre-wrap;
+}
+
+.rain .right:hover:after {
+  transform: rotate(-22deg);
+  transition: all 0.5s ease 0s;
+}
+
+.rain .right:hover ~ .drop {
+  --angle: 75deg;
+}
+
+.rain .right.center {
+  right: 30vw;
+}
+
+.rain .right.center:after {
+  display: none;
+}
+
+.rain .right.center:hover ~ .drop {
+  --angle: 85deg;
+}
+
+.rain .right.center:hover ~ .right:after {
+  transform: rotate(-12deg);
+  transition: all 0.5s ease 0s;
+}
+
+.rain .left.center {
+  left: 30vw;
+}
+
+.rain .left.center:hover ~ .drop {
+  --angle: 95deg;
+}
+
+.rain .left.center:hover ~ .right:after {
+  transform: rotate(12deg);
+  transition: all 0.5s ease 0s;
+}
+
+.rain:active {
+  cursor: none;
+  animation: lightning 0.1s linear 0s 2, lightning 0.15s ease-out 0.25s 1;
+}
+
+.rain:active:after,
+.rain:active .right:after {
+  opacity: 0;
+  transition: all 0.5s ease 0s;
+}
+
+.rain:after {
+  content: "\21AF";
+  position: fixed;
+  left: calc(50% - 30px);
+  bottom: 45px;
+  color: #fff8;
+  font-size: 35px;
+  border: 2px dashed #fff3;
+  border-radius: 100%;
+  width: 60px;
+  height: 60px;
+  box-sizing: border-box;
+  padding: 13px 18px;
+  text-align: center;
+  line-height: 30px;
+  transition: all 0.5s ease 0s;
+  white-space: pre-wrap;
+}
+
+@keyframes lightning {
+  50% {
+    background: radial-gradient(
+        circle at calc(50% - 10vw) -20%,
+        #fff4,
+        #fff0 20%
+      ),
+      linear-gradient(180deg, #fff9, #fff3);
+  }
+}
+
+.drop {
+  border: 0.5vmin solid transparent;
+  border-bottom-color: #abc2e9;
+  position: absolute;
+  top: -10vmin;
+  --angle: 91deg;
+  opacity: 0.3;
+  animation: fall 2s ease-in infinite;
+  z-index: 1;
+}
+
+@keyframes fall {
+  0% {
+    transform: rotate(var(--angle)) translateX(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.5;
+  }
+  90% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: rotate(var(--angle)) translateX(calc(120vh + 10vmin));
+    opacity: 0;
+  }
+}
+
+/* Password Checker Container */
+.container {
+  position: relative;
+  width: 500px;
+  background-color: rgba(232, 227, 227, 0.95);
+  border-radius: 50px;
+  box-shadow: 
+    inset -34px -34px 69px rgba(197, 193, 193, 0.8), 
+    inset 34px 34px 69px rgba(255, 255, 255, 0.8),
+    0 0 50px rgba(0, 242, 234, 0.3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  padding: 40px;
+  backdrop-filter: blur(10px);
+}
+
+h2 {
+  font-size: 30px;
+  color: #333;
+  margin-bottom: 30px;
+  text-align: center;
+  text-shadow: 0 0 10px rgba(0, 242, 234, 0.5);
+}
+
+/* Glitch Input Styles */
+.glitch-input-wrapper {
+  --bg-color: #0d0d0d;
+  --primary-color: #00f2ea;
+  --secondary-color: #a855f7;
+  --text-color: #e5e5e5;
+  --font-family: "Fira Code", Consolas, "Courier New", Courier, monospace;
+  --glitch-anim-duration: 0.4s;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: var(--font-family);
+  font-size: 16px;
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+.input-container {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+}
+
+.holo-input {
+  width: 100%;
+  height: 3.5rem;
+  background: rgba(13, 13, 13, 0.7);
+  border: none;
+  border-bottom: 2px solid #333;
+  outline: none;
+  padding: 0 1rem;
+  color: var(--primary-color);
+  font-family: inherit;
+  font-size: 1.1rem;
+  caret-color: var(--primary-color);
+  z-index: 10;
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+.input-label {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  color: var(--text-color);
+  opacity: 0.6;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  pointer-events: none;
+  transition: all 0.3s ease;
+  z-index: 11;
+}
+
+.holo-input:focus + .input-label,
+.holo-input:not(:placeholder-shown) + .input-label {
+  top: -1.5rem;
+  left: 0;
+  font-size: 0.8rem;
+  opacity: 1;
+  color: var(--primary-color);
+}
+
+.holo-input:focus + .input-label::before,
+.holo-input:focus + .input-label::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+}
+
+.holo-input:focus + .input-label::before {
+  color: var(--secondary-color);
+  animation: glitch-label var(--glitch-anim-duration) cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+.holo-input:focus + .input-label::after {
+  color: var(--primary-color);
+  animation: glitch-label var(--glitch-anim-duration) cubic-bezier(0.25, 0.46, 0.45, 0.94) reverse both;
+}
+
+.input-border,
+.input-scanline,
+.input-glow,
+.input-corners {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.input-border {
+  border: 1px solid rgba(0, 242, 234, 0.2);
+  opacity: 0.5;
+  transition: all 0.3s ease;
+}
+
+.corner {
+  position: absolute;
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid var(--primary-color);
+  transition: all 0.3s ease;
+  opacity: 0.5;
+}
+
+.corner-tl {
+  top: -0.3rem;
+  left: -0.3rem;
+  border-right: none;
+  border-bottom: none;
+}
+
+.corner-tr {
+  top: -0.3rem;
+  right: -0.3rem;
+  border-left: none;
+  border-bottom: none;
+}
+
+.corner-bl {
+  bottom: -0.3rem;
+  left: -0.3rem;
+  border-right: none;
+  border-top: none;
+}
+
+.corner-br {
+  bottom: -0.3rem;
+  right: -0.3rem;
+  border-left: none;
+  border-top: none;
+}
+
+.input-glow {
+  background: radial-gradient(
+    ellipse at center,
+    rgba(0, 242, 234, 0.2) 0%,
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.input-scanline {
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(0, 242, 234, 0.1) 48%,
+    rgba(0, 242, 234, 0.3) 50%,
+    rgba(0, 242, 234, 0.1) 52%,
+    transparent 100%
+  );
+  opacity: 0;
+}
+
+.input-data-stream {
+  position: absolute;
+  bottom: 2px;
+  left: 0;
+  width: 100%;
+  height: 0.3rem;
+  display: flex;
+  opacity: 0;
+  transition: opacity 0.3s ease 0.1s;
+}
+
+.stream-bar {
+  flex-grow: 1;
+  background-color: var(--primary-color);
+  transition: transform 0.2s, opacity 0.2s;
+  transform: scaleY(0);
+  transform-origin: bottom;
+}
+
+.holo-input:focus {
+  border-color: transparent;
+}
+
+.holo-input:focus ~ .input-border {
+  opacity: 1;
+  border-color: rgba(0, 242, 234, 0.5);
+}
+
+.holo-input:focus ~ .input-corners .corner {
+  width: 1.25rem;
+  height: 1.25rem;
+  border-width: 3px;
+  opacity: 1;
+}
+
+.holo-input:focus ~ .input-glow {
+  opacity: 1;
+}
+
+.holo-input:focus ~ .input-scanline {
+  animation: scan-vertical 4s linear infinite;
+}
+
+.holo-input:focus ~ .input-data-stream {
+  opacity: 1;
+}
+
+.holo-input:focus ~ .input-data-stream .stream-bar {
+  animation: data-pulse 2s infinite;
+  animation-delay: calc(var(--i) * 0.1s);
+}
+
+.output {
+  min-height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+#output {
+  font-size: 18px;
+  font-weight: 600;
+  text-align: center;
+  padding: 10px;
+  border-radius: 10px;
+  min-width: 200px;
+  transition: all 0.3s ease;
+}
+
+.weak {
+  color: #ff4444;
+  background: rgba(255, 68, 68, 0.1);
+  border: 2px solid #ff4444;
+}
+
+.medium {
+  color: #ffaa00;
+  background: rgba(255, 170, 0, 0.1);
+  border: 2px solid #ffaa00;
+}
+
+.strong {
+  color: #00ff44;
+  background: rgba(0, 255, 68, 0.1);
+  border: 2px solid #00ff44;
+}
+
+/* Keyframes */
+@keyframes glitch-label {
+  0% {
+    transform: translate(0);
+    clip-path: inset(0 0 0 0);
+  }
+  20% {
+    transform: translate(-0.2rem, 0.1rem);
+    clip-path: inset(50% 0 20% 0);
+  }
+  40% {
+    transform: translate(0.1rem, -0.1rem);
+    clip-path: inset(20% 0 60% 0);
+  }
+  60% {
+    transform: translate(-0.15rem, 0.1rem);
+    clip-path: inset(80% 0 5% 0);
+  }
+  80% {
+    transform: translate(0.15rem, -0.15rem);
+    clip-path: inset(30% 0 45% 0);
+  }
+  100% {
+    transform: translate(0);
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes scan-vertical {
+  0% {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+  25% {
+    opacity: 0.5;
+  }
+  75% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+}
+
+@keyframes data-pulse {
+  0%,
+  100% {
+    transform: scaleY(0.2);
+    opacity: 0.3;
+  }
+  50% {
+    transform: scaleY(1);
+    opacity: 0.8;
+  }
+}

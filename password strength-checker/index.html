@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Password-Strength-Checker</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Rain Animation Background -->
+  <div class="rain">
+    <div class="left"></div>
+    <div class="left center"></div>
+    <div class="right center"></div>
+    <div class="right"></div>
+  </div>
+
+  <!-- Password Strength Checker Container -->
+  <div class="container">
+    <h2>Password Strength Checker</h2>
+    
+    <div class="glitch-input-wrapper">
+      <div class="input-container">
+        <input
+          type="password"
+          id="password"
+          class="holo-input"
+          placeholder=""
+          required=""
+        />
+        <label for="password" class="input-label" data-text="ENTER_PASSWORD">ENTER_PASSWORD</label>
+        <div class="input-border"></div>
+        <div class="input-scanline"></div>
+        <div class="input-glow"></div>
+        <div class="input-data-stream">
+          <div class="stream-bar" style="--i: 0;"></div>
+          <div class="stream-bar" style="--i: 1;"></div>
+          <div class="stream-bar" style="--i: 2;"></div>
+          <div class="stream-bar" style="--i: 3;"></div>
+          <div class="stream-bar" style="--i: 4;"></div>
+          <div class="stream-bar" style="--i: 5;"></div>
+          <div class="stream-bar" style="--i: 6;"></div>
+          <div class="stream-bar" style="--i: 7;"></div>
+          <div class="stream-bar" style="--i: 8;"></div>
+          <div class="stream-bar" style="--i: 9;"></div>
+        </div>
+        <div class="input-corners">
+          <div class="corner corner-tl"></div>
+          <div class="corner corner-tr"></div>
+          <div class="corner corner-bl"></div>
+          <div class="corner corner-br"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="output">
+      <span id="output">Enter password to check strength</span>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
